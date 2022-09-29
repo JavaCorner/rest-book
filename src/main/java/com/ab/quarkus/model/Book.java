@@ -1,4 +1,4 @@
-package com.ab.quarkus.starting;
+package com.ab.quarkus.model;
 
 public class Book {
     public int id;

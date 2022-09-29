@@ -1,5 +1,10 @@
-package com.ab.quarkus.starting;
+package com.ab.quarkus.controller;
 
+import com.ab.quarkus.model.Book;
+import com.ab.quarkus.repository.BookRepository;
+import org.jboss.logging.Logger;
+
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,6 +17,12 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
+    @Inject
+    BookRepository bookRepository;
+
+    @Inject
+    Logger log;
+
     /*@GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
@@ -20,24 +31,22 @@ public class BookResource {
 
     @GET
     public List<Book> getAllBooks() {
-        return List.of(
-                new Book(1, "Understanding Quarkus","Arpit", 2020, "IT"),
-                new Book(2, "Practise Quarkus","Arpit", 2020, "IT"),
-                new Book(3, "Trying Quarkus","Arpit", 2020, "IT"),
-                new Book(4, "Learning Quarkus","Arpit", 2020, "IT")
-        );
+        log.info("Return all books");
+        return bookRepository.getAllBooks();
     }
 
     @GET
     @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
     public int countAllBooks() {
-        return getAllBooks().size();
+        log.info("Return no of books");
+        return bookRepository.getAllBooks().size();
     }
 
     @GET
     @Path("{id}")
     public Optional<Book> getBook(@PathParam("id") int id) {
-        return getAllBooks().stream().filter(book -> book.id == id).findFirst();
+        log.info("Return a single book with id " + id);
+        return bookRepository.getBook(id);
     }
 }
