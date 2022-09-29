@@ -4,6 +4,18 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Bootstrap Command
+
+```shell script
+#!/usr/bin/env bash
+mvn -U io.quarkus:quarkus-maven-plugin:create \
+        -DprojectGroupId=org.agoncal.quarkus.starting \
+        -DprojectArtifactId=rest-book \
+        -DclassName="com.ab.quarkus.starting.BookResource" \
+        -Dpath="/api/books" \
+        -Dextensions="resteasy-jsonb"
+```
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
